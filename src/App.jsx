@@ -6,13 +6,14 @@ function App() {
   const [username, setUsername] = useState([]);
   const messageRef = useRef(null);
 
-  const sendMessage = () => {
-    const newMessage = messageRef.current.value.trim();
-    if (newMessage && username.trim()) {
-      setMessages([...messages, { user: username, text: newMessage }]);
-      messageRef.current.value = " ";
-    }
-  };
+const sendMessage = () => {
+  const newMessage = messageRef.current.value.trim()
+  if(!newMessage) return;
+  if(!username.trim()) return;
+
+  setMessages([...messages, {user:username, text: newMessage}])
+  messageRef.current.value = " "
+}
   return (
     <>
       <div className="chat-container">
