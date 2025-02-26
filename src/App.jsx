@@ -6,14 +6,13 @@ function App() {
   const [username, setUsername] = useState([]);
   const messageRef = useRef(null);
 
-const sendMessage = () => {
-  const newMessage = messageRef.current.value.trim()
-  if(!newMessage) return;
-  if(!username.trim()) return;
-
-  setMessages([...messages, {user:username, text: newMessage}])
-  messageRef.current.value = " "
-}
+  const sendMessage = () => {
+    const newMessage = messageRef.current.value.trim();
+    if (!newMessage) return;
+    if (!username || username.trim() === "") return;
+    setMessages([...messages, { user: username, text: newMessage }]);
+    messageRef.current.value = "";
+  };
   return (
     <>
       <div className="chat-container">
@@ -29,10 +28,11 @@ const sendMessage = () => {
         </div>
 
         <div className="chat-box">
-          {messages.map((msg, index) => (
-            <p key={index} className="message">
-              {msg}
-            </p>
+          {messages.map((message, index) => (
+            <div key={index}>
+              <p>User: {message.user}</p>
+              <p>Message: {message.text}</p>
+            </div>
           ))}
         </div>
         <div className="input-container">
