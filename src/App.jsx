@@ -67,7 +67,7 @@ function App() {
         </div>
         <div className="input-container">
           <input ref={messageRef} type="text" placeholder="Type a message" />
-          <button onClick={sendMessage}>Send</button>
+          <button onClick={sendMessage}>Send </button>
         </div>
       </div>
     </>
