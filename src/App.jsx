@@ -1,46 +1,53 @@
-import { useState, useRef, useEffect } from "react";
-import "/src/style.css";
+import { useState, useRef } from "react";
+import "./style.css";
 
-function App() {
+function ChatApp() {
   const [messages, setMessages] = useState([]);
-  const [username, setUsername] = useState([]);
+  const [username, setUsername] = useState("");
+  const [currentUser, setCurrentUser] = useState(null);
   const [userColors, setUserColors] = useState({});
   const messageRef = useRef(null);
 
   const getRandomColor = () => {
-    const colors = ["#ff5733", "#33ff57", "#3357ff"];
+    const colors = [
+      "#ff5733",
+      "#33ff57",
+      "#3357ff",
+      "#ff33a8",
+      "#a833ff",
+      "#ff8c33",
+    ];
     return colors[Math.floor(Math.random() * colors.length)];
   };
 
-  useEffect(() => {
-    if (username && !userColors[username]) {
+  const handleLogin = () => {
+    if (!username.trim()) return;
+
+    if (!userColors[username]) {
       setUserColors((prevColors) => ({
         ...prevColors,
         [username]: getRandomColor(),
       }));
     }
-  }, [username, userColors]);
 
+    setCurrentUser(username); 
+    setUsername(""); 
+  };
+
+  // Function to send a message
   const sendMessage = () => {
     const newMessage = messageRef.current.value.trim();
-    if (!newMessage) return;
-    if (!username || username.trim() === "") return;
+    if (!newMessage || !currentUser) return;
 
-    if (!userColors[username]) {
-      setUserColors((prevColors) => {
-        const newColors = { ...prevColors, [username]: getRandomColor() };
-        return newColors;
-      });
-    }
-
-    setMessages([...messages, { user: username, text: newMessage }]);
-    messageRef.current.value = "";
+    setMessages([...messages, { user: currentUser, text: newMessage }]);
+    messageRef.current.value = ""; // Clear input field
   };
-  return (
-    <>
-      <div className="chat-container">
-        <h2>Talky Penguin</h2>
 
+  return (
+    <div className="chat-container">
+      <h2>Talky Bird</h2>
+
+      {!currentUser ? (
         <div className="username-container">
           <input
             type="text"
@@ -48,30 +55,37 @@ function App() {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
+          <button onClick={handleLogin}>Join Chat</button>
         </div>
+      ) : (
+        <>
+          <h3>Welcome, {currentUser}!</h3>
 
-        <div className="chat-box">
-          {messages.map((message, index) => (
-            <p
-              key={index}
-              className={`message ${
-                message.user === username ? "my-message" : "other-message"
-              }`}
-              style={{ borderColor: userColors[message.user] || "#000" }}
-            >
-              <strong style={{ color: userColors[message.user] || "#000" }}>
-                {message.user}
-              </strong>
-            </p>
-          ))}
-        </div>
-        <div className="input-container">
-          <input ref={messageRef} type="text" placeholder="Type a message" />
-          <button onClick={sendMessage}>Send </button>
-        </div>
-      </div>
-    </>
+          <div className="chat-box">
+            {messages.map((msg, index) => (
+              <p
+                key={index}
+                className={`message ${
+                  msg.user === currentUser ? "my-message" : "other-message"
+                }`}
+                style={{ borderColor: userColors[msg.user] || "#000" }}
+              >
+                <strong style={{ color: userColors[msg.user] || "#000" }}>
+                  {msg.user}
+                </strong>
+                {msg.text}
+              </p>
+            ))}
+          </div>
+
+          <div className="input-container">
+            <input ref={messageRef} type="text" placeholder="Type a message" />
+            <button onClick={sendMessage}>Send</button>
+          </div>
+        </>
+      )}
+    </div>
   );
 }
 
-export default App;
+export default ChatApp;
