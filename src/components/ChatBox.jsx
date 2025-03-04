@@ -16,7 +16,7 @@ function ChatBox({ messages, currentUser, userColors }) {
           <strong style={{ color: userColors[msg.user] || "#000" }}>
             {msg.user}:
           </strong>
-          <span> {msg.text}</span>
+          <span> {msg.text} </span>
         </div>
       ))}
     </div>
