@@ -1,70 +1,49 @@
-import { useState, useRef } from "react";
-import "./style.css";
-
+import { useState } from "react";
 import LoginForm from "./components/LoginForm";
 import ChatBox from "./components/ChatBox";
 import MessageInput from "./components/MessageInput";
+import "./style.css"
 
-function ChatApp() {
-  const [messages, setMessages] = useState([]);
+function App() {
   const [currentUser, setCurrentUser] = useState(null);
-  const [userColors, setUserColors] = useState({});
-  const messageRef = useRef(null);
-
-  const getRandomColor = () => {
-    const colors = [
-      "#ff5733",
-      "#33ff57",
-      "#3357ff",
-      "#ff33a8",
-      "#a833ff",
-      "#ff8c33",
-    ];
-    return colors[Math.floor(Math.random() * colors.length)];
-  };
+  const [messages, setMessages] = useState([]); 
+  const [userColors, setUserColors] = useState({}); 
 
   const handleLogin = (username) => {
     if (!username.trim()) return;
-
-    if (!userColors[username]) {
-      setUserColors((prevColors) => ({
-        ...prevColors,
-        [username]: getRandomColor(),
-      }));
-    }
-
     setCurrentUser(username);
+
+    
+    if (!userColors[username]) {
+      const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+      setUserColors((prevColors) => ({ ...prevColors, [username]: randomColor }));
+    }
   };
 
-  // Send message
-  const sendMessage = () => {
-    const newMessage = messageRef.current.value.trim();
-    if (!newMessage || !currentUser) return;
+  const handleSendMessage = (text) => {
+    if (!text.trim()) return; 
 
-    setMessages([...messages, { user: currentUser, text: newMessage }]);
-    messageRef.current.value = "";
+    const newMessage = {
+      user: currentUser,
+      text: text,
+    };
+
+    setMessages((prevMessages) => [...prevMessages, newMessage]);
   };
 
   return (
-    <div className="chat-container">
-      <h2>Talky Bird</h2>
-
+    <div className="Talky Bird">
       {!currentUser ? (
         <LoginForm onLogin={handleLogin} />
       ) : (
-        <>
-          <h3>Welcome, {currentUser}!</h3>
-
-          <ChatBox
-            messages={messages}
-            currentUser={currentUser}
-            userColors={userColors}
-          />
-          <MessageInput messageRef={messageRef} onSend={sendMessage} />
-        </>
+        <div className="chat-container">
+          <h2>Welcome, {currentUser}!</h2>
+          <ChatBox messages={messages} currentUser={currentUser} userColors={userColors} />
+          <MessageInput onSend={handleSendMessage} />
+        </div>
       )}
     </div>
   );
 }
 
-export default ChatApp;
+export default App;
