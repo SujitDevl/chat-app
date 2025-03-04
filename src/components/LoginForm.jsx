@@ -1,12 +1,12 @@
 import { useState } from "react";
 
-function LoginForm(onLogin) {
+function LoginForm({ onLogin }) {
   const [username, setUsername] = useState("");
 
   const handleSubmit = () => {
     if (username.trim()) {
       onLogin(username);
-      setUsername(""); 
+      setUsername("");
     }
   };
 

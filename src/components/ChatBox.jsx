@@ -1,17 +1,21 @@
-function ChatBox(messages, currentUser, userColors) {
+function ChatBox({ messages, currentUser, userColors }) {
+  console.log("Messages received in ChatBox:", messages);  // Debugging
+
+  if (!Array.isArray(messages)) {
+    console.error("Error: messages is not an array", messages);
+    return <p>No messages yet...</p>;
+  }
+
   return (
     <div className="chat-box">
       {messages.map((msg, index) => (
-        <p
-          key={index}
-          className={`message ${
-            msg.user === currentUser ? "my-message" : "other-message"
-          }`}
+        <div 
+          key={index} 
+          className="message" 
+          style={{ color: userColors[msg.user] || "black" }}
         >
-          <strong style={{ color: userColors[msg.user] || "#000" }}>
-            {msg.text}
-          </strong>
-        </p>
+          <strong>{msg.user}:</strong> {msg.text}
+        </div>
       ))}
     </div>
   );
