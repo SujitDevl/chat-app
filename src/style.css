@@ -1,9 +1,8 @@
-/* General Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 body {
@@ -15,7 +14,6 @@ body {
   padding: 20px;
 }
 
-/* App Container */
 .app {
   width: 420px;
   border-radius: 12px;
@@ -112,7 +110,6 @@ body {
   color: #666;
 }
 
-/* Message Input */
 .message-input {
   display: flex;
   gap: 10px;
@@ -148,7 +145,6 @@ body {
   background: #218838;
 }
 
-/* Scrollbar Styling */
 .chat-box::-webkit-scrollbar {
   width: 6px;
 }
