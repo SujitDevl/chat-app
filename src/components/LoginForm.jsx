@@ -1,7 +1,6 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 
-
 function LoginForm({ onLogin }) {
   const [username, setUsername] = useState("");
 
