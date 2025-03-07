@@ -20,7 +20,7 @@ function App() {
         JSON.parse(localStorage.getItem(`messages_${currentUser}`)) || [];
       setMessages(savedMessages);
     }
-  }, [currentUser]);
+  }, [currentUser]); 
 
   useEffect(() => {
     if (currentUser) {
