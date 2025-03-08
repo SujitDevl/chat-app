@@ -7,26 +7,31 @@ import "./style.css";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
+  const [selectedChatUsers, setSelectedChatUser] = useState(null);
   const [messages, setMessages] = useState([]);
   const [userColors, setUserColors] = useState({});
+  const [usernames, setUsernames] = useState([]);
 
-  useEffect(() => {
-    setCurrentUser(null);
-  }, []);
+ useEffect(() => {
+  const savedUserColors = JSON.parse(localStorage.getItem("userColors")) || {};
+  setUserColors(savedUserColors)
+   const savedUsernames = JSON.parse(localStorage.getItem("username") || {});
+   setUsernames(savedUsernames);
 
-  useEffect(() => {
-    if (currentUser) {
-      const savedMessages =
-        JSON.parse(localStorage.getItem(`messages_${currentUser}`)) || [];
-      setMessages(savedMessages);
-    }
-  }, [currentUser]);
+ }, []) 
 
-  useEffect(() => {
-    if (currentUser) {
-      localStorage.setItem(`messages_${currentUser}`, JSON.stringify(messages));
-    }
-  }, [messages, currentUser]);
+
+
+
+
+
+
+
+
+
+
+
+  // Handling sending messages
 
   const handleLogin = (username) => {
     if (!username.trim()) return;
