@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-
 import LoginForm from "./components/LoginForm";
-import MessageInput from "./components/MessageInput";
 import ChatBox from "./components/ChatBox";
+import MessageInput from "./components/MessageInput";
+
 import "./style.css";
 
 function App() {
@@ -16,7 +16,8 @@ function App() {
     const savedUserColors =
       JSON.parse(localStorage.getItem("userColors")) || {};
     setUserColors(savedUserColors);
-    const savedUsernames = JSON.parse(localStorage.getItem("username") || {});
+
+    const savedUsernames = JSON.parse(localStorage.getItem("usernames")) || [];
     setUsernames(savedUsernames);
   }, []);
 
@@ -30,7 +31,14 @@ function App() {
     }
   }, [selectedChatUser, currentUser]);
 
-  // Handle user login
+  useEffect(() => {
+    if (selectedChatUser) {
+      localStorage.setItem(
+        `messages_${currentUser}_${selectedChatUser}`,
+        JSON.stringify(messages)
+      );
+    }
+  }, [messages, selectedChatUser, currentUser]);
 
   const handleLogin = (username) => {
     if (!username.trim()) return;
@@ -54,16 +62,14 @@ function App() {
     }
   };
 
-  // Handle send message
   const handleSendMessage = (text) => {
     if (!text.trim() || !selectedChatUser) return;
 
     const newMessage = { user: currentUser, text: text };
-
     setMessages((prevMessages) => {
       const updatedMessages = [...prevMessages, newMessage];
       localStorage.setItem(
-        `messages_${currentUser}`,
+        `messages_${currentUser}_${selectedChatUser}`,
         JSON.stringify(updatedMessages)
       );
       return updatedMessages;
@@ -73,29 +79,49 @@ function App() {
   return (
     <div className="app">
       {!currentUser ? (
-        LoginForm onLogin = {handleLogin} />
+        <LoginForm onLogin={handleLogin} />
       ) : (
         <div className="chat-container">
           <h2>Welcome, {currentUser}!</h2>
 
+          {/* Chat List */}
           <div className="chat-list">
             <h3>Chat List</h3>
-            {usernames.map((user, index) => (
-              user !== currentUser && (
-                <p
-                key={index}
-                  classname={`chat-user ${selectedChatUser === user ? "active" : ""}`}
-                  style={{color: userColors[user] || "#000"}}
-                  onClick={()=> setSelectedChatUser(user)}
-                >
-                  
-                </p>
-              )
-            ))}
+            {usernames.map(
+              (user, index) =>
+                user !== currentUser && (
+                  <p
+                    key={index}
+                    className={`chat-user ${
+                      selectedChatUser === user ? "active" : ""
+                    }`}
+                    style={{ color: userColors[user] || "#000" }}
+                    onClick={() => setSelectedChatUser(user)}
+                  >
+                    {user}
+                  </p>
+                )
+            )}
           </div>
+
+          {/* Chat Window */}
+          {selectedChatUser ? (
+            <>
+              <h3>Chat with {selectedChatUser}</h3>
+              <ChatBox
+                messages={messages}
+                currentUser={currentUser}
+                userColors={userColors}
+              />
+              <MessageInput onSend={handleSendMessage} />
+            </>
+          ) : (
+            <p className="no-chat-selected">Select a user to start chatting.</p>
+          )}
         </div>
+      )}
     </div>
-  )
+  );
 }
 
 export default App;
