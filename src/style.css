@@ -24,7 +24,7 @@ body {
 }
 
 /* Login Form */
-.username-container {
+.login-form {
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -32,7 +32,7 @@ body {
   padding: 20px;
 }
 
-.username-container input {
+.login-form input {
   width: 100%;
   padding: 14px;
   border: 2px solid #ccc;

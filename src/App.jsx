@@ -116,7 +116,7 @@ function App() {
               <MessageInput onSend={handleSendMessage} />
             </>
           ) : (
-            <p className="no-chat-selected">Select a user to start chatting.</p>
+            <p className="no-chat-selected">Select a user to start chatting 😊 </p>
           )}
         </div>
       )}
