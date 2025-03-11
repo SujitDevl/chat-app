@@ -11,7 +11,7 @@ function LoginForm({ onLogin }) {
 
   return (
     <div className="login-form">
-      <h2>Enter your name to join chat</h2>
+      <h2>Enter your name to join chat</h2> 
       <input
         type="text"
         placeholder="Enter your name"

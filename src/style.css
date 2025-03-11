@@ -48,7 +48,6 @@ body {
   background: #f8f9fa;
 }
 
-/* Fix input not working on some browsers */
 .login-form input::placeholder {
   color: #999;
 }
