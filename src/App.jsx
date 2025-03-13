@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import LoginForm from "./components/LoginForm";
 import ChatBox from "./components/ChatBox";
 import MessageInput from "./components/MessageInput";
-
 import "./style.css";
 
 function App() {
@@ -116,7 +115,9 @@ function App() {
               <MessageInput onSend={handleSendMessage} />
             </>
           ) : (
-            <p className="no-chat-selected">Select a user to start chatting 😊 </p>
+            <p className="no-chat-selected">
+              Select a user to start chatting 😊{" "}
+            </p>
           )}
         </div>
       )}
