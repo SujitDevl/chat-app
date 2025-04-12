@@ -18,7 +18,7 @@ function LoginForm({ onLogin }) {
         value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
-      <button onClick={handleSubmit}>Join Chat</button>
+      <button onClick={handleSubmit}>Join to Chat</button>
     </div>
   );
 }
