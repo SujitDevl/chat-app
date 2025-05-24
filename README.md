@@ -19,13 +19,4 @@ A simple, real-time chat application built using **React**, **Firebase**, and **
 - **Firebase (Firestore)** – Real-time database  
 - **Tailwind CSS** – Utility-first CSS framework  
 
----
-
-## 🛠️ Getting Started
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/your-username/react-chat-app.git
-cd react-chat-app
-
+Cheers 🙌
