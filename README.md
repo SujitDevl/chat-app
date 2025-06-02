@@ -16,7 +16,6 @@ A simple, real-time chat application built using **React**, **Firebase**, and **
 🧰 Tech Stack
 
 - **React** – Frontend library  
-- **Firebase (Firestore)** – Real-time database  
-- **Tailwind CSS** – Utility-first CSS framework  
+ - **Tailwind CSS** – Utility-first CSS framework  
 
 Cheers 🙌
