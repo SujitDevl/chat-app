@@ -18,4 +18,3 @@ A simple, real-time chat application built using **React**, **Firebase**, and **
 - **React** – Frontend library  
  - **Tailwind CSS** – Utility-first CSS framework  
 
-Cheers 🙌
