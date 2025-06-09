@@ -1,4 +1,4 @@
-# 💬 React Chat App (*** P.S. Tried first time my way! Not completed!! ***)
+# 💬 React Chat App (P.S. Tried first time with react! Not completed!! )
 
 A simple, real-time chat application built using **React**, **Firebase**, and **Tailwind CSS**. Users can log in with a username, chat with others in real time, and enjoy a clean and responsive UI.
 
