@@ -12,9 +12,9 @@ A simple, real-time chat application built using **React**, **Firebase**, and **
 - 🎨 Tailwind CSS for styling
 - 📱 Fully responsive design
 
-- 
+
 🧰 Tech Stack
 
 - **React** – Frontend library  
- - **Tailwind CSS** – Utility-first CSS framework  
+ - **Tailwind CSS** – Utility-first CSS framework
 
